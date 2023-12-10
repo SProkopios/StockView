@@ -6,15 +6,15 @@ import { ListItem } from '@rneui/themed';
 import { Image } from 'react-native';
 
 
-export default function Tab1() {
+export default function Frontpage() {
   const[news, setNews] = useState();
 
-   useEffect(() => {
+  //fetching news
+  useEffect(() => {
     getNews()
     .then(data => {
       setNews(data);
-    console.log(news);
-   })
+    })
  }, []);
   
 

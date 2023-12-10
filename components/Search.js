@@ -1,4 +1,4 @@
-import { View, TextInput, Button, Text, Alert } from 'react-native';
+import { View, TextInput, Button, Text } from 'react-native';
 import React, { useEffect, useState } from "react";
 import styles from "../utils/styles";
 import { Icon } from '@rneui/base';
@@ -7,7 +7,6 @@ import {db} from '../utils/firebase-conf';
 import {collection, addDoc} from 'firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
-import LineChart from 'react-native-chart-kit';
 
 
 export default function Search() {
@@ -18,7 +17,7 @@ export default function Search() {
     const route = useRoute();
     const { fromList } = route.params ?? { fromList: null };
 
-
+    
     //activated when navigated from fakebuyslist with ticker symbol
     useEffect(() => {
         if (fromList !== null) {
@@ -41,9 +40,7 @@ export default function Search() {
     //getting price data with symbol from fetching.js
     const getPrices = async () => {
         const fetchResponse = await getData(keyword);
-        console.log(fetchResponse);
         await setData(fetchResponse);
-        console.log(data);
     };
 
 
@@ -63,11 +60,6 @@ export default function Search() {
             </View>
             {data && (
                 <View style={styles.pricePage}>
-                    {/* <LineChart
-                    width='50%'
-                    height='50%'
-                    bezier
-                    /> */}
                     <Text style={styles.tickername}>{data.response.secondData.result[0].description}</Text>
                     <Text style={styles.ticker}>Ticker: {data.response.secondData.result[0].symbol}</Text>
                     <Text>{data.response.secondData.result[0].type}</Text>

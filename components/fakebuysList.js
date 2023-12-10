@@ -10,6 +10,9 @@ import { useRoute } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 
 
+
+
+
 export default function FakebuysList({ navigation }) {
   const [fakebuys, setFakebuys] = useState([]);
   const fakebuysCollectionRef = collection(db, "fakebuys");
@@ -19,12 +22,13 @@ export default function FakebuysList({ navigation }) {
   const nav = useNavigation();
 
 
+
   //Getting data from Firebase for Flatlist
   useEffect(() => {
     const getFakebuys = async () => {
       //getting data from firebase
       const data = await getDocs(fakebuysCollectionRef);
-      //setting data to dakebuys 
+      //setting data to fakebuys 
       setFakebuys(data.docs.map((doc) => ({...doc.data(), id: doc.id })));
     }
     getFakebuys();
@@ -39,8 +43,8 @@ export default function FakebuysList({ navigation }) {
 
       //if user fakebought from search screen, this is activated
       if (fromSearch) {
-        Alert.alert("Fakebought succefully")
         navigation.setParams( { fromSearch: false } );
+        Alert.alert("Stock bought succefully!!")
       } 
     }
     getFakebuys();
@@ -53,6 +57,7 @@ export default function FakebuysList({ navigation }) {
     await deleteDoc(buyDoc);
     //updating to refresh tab
     await setUpdate((prevUpdate) => !prevUpdate);
+    Alert.alert("Stock deleted succefully!")
   };
 
 
@@ -63,20 +68,22 @@ export default function FakebuysList({ navigation }) {
 
 
   return (
-    <View style={{ width: '99%', height: '90%' }}>
-      <FlatList
-        keyExtractor={(item, id) => id.toString()}
-        renderItem={({item}) => 
-        <TouchableOpacity onLongPress={() => deleteBuy(item.id)} onPress={() => toSearch(item.ticker)}>
-        <ListItem bottomDivider >
-          <ListItem.Content style={styles.fakebuys} >
-            <ListItem.Title >Ticker: {item.ticker} </ListItem.Title>
-            <ListItem.Subtitle>Buying price: {item.price} USD</ListItem.Subtitle>
-              </ListItem.Content>
-        </ListItem>
-        </TouchableOpacity>}
-        data={fakebuys}
-      />
+    <View>
+      <View style={{ width: '99%', height: '90%' }}>
+        <FlatList
+          keyExtractor={(item, id) => id.toString()}
+          renderItem={({item}) => 
+          <TouchableOpacity onLongPress={() => deleteBuy(item.id)} onPress={() => toSearch(item.ticker)}>
+          <ListItem bottomDivider >
+            <ListItem.Content style={styles.fakebuys} >
+              <ListItem.Title >Ticker: {item.ticker} </ListItem.Title>
+              <ListItem.Subtitle>Buying price: {item.price} USD</ListItem.Subtitle>
+                </ListItem.Content>
+          </ListItem>
+          </TouchableOpacity>}
+          data={fakebuys}
+        />
+      </View>
     </View>
   );
 }

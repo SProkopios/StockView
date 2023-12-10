@@ -1,7 +1,7 @@
 const ALPHA_KEY = "";
 const FINN_KEY = "";
 
-//
+//fetching stockdata using finnhub
 export const getData = async (keyword) => {
     const response = await fetch(`https://finnhub.io/api/v1/quote?symbol=${keyword}&token=${FINN_KEY}`);
     const data = await response.json();
