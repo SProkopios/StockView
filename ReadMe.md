@@ -5,4 +5,4 @@ Tämä on mobiiliohjemointi -kurssin lopputyö. StockView sovellus näyttää et
 
 ## Teknologiat
 
-Sovelluksessa on käytetty lukuisia teknologioita. Sovellus on rakennettu käyttäen Expoa ja Android Studiota. Sovelluksessa on käytetty pääosin react native kirjastoa, ja tietokanta on rakennettu käyttäen firebasea.
+Sovelluksessa on käytetty lukuisia teknologioita. Sovellus on rakennettu käyttäen Expoa ja Android Studiota. Sovelluksessa on käytetty pääosin react native kirjastoa, esimerkiksi flatlist -komponenttia on hyödynnetty monesti. Tietokanta on rakennettu käyttäen Googlen firebasea.
